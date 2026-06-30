@@ -163,7 +163,7 @@
       transition: transform 0.3s, box-shadow 0.3s;
     }
     .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .value-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .value-icon { width: 44px; height: 44px; margin-bottom: 0.85rem; display: flex; align-items: center; justify-content: center; }
     .value-card h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem; }
     .value-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
 
@@ -368,22 +368,49 @@
       </div>
       <div class="values-grid">
         <div class="value-card reveal">
-          <span class="value-icon">✝️</span>
+          <span class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="36" height="36" fill="none">
+              <rect x="17" y="4" width="6" height="32" rx="2" fill="#6B1A24"/>
+              <rect x="6" y="13" width="28" height="6" rx="2" fill="#6B1A24"/>
+            </svg>
+          </span>
           <h3>Christ-Centered</h3>
           <p>Faith is not an add-on — it is the foundation. Every classroom, every lesson, and every relationship at SCA is grounded in biblical truth.</p>
         </div>
         <div class="value-card reveal reveal-d1">
-          <span class="value-icon">🎓</span>
+          <span class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="36" height="36" fill="none">
+              <polygon points="20,6 38,15 20,24 2,15" fill="#6B1A24"/>
+              <path d="M10 19v9c0 2.5 4.5 6 10 6s10-3.5 10-6v-9L20 24 10 19z" fill="#8B2535"/>
+              <rect x="36" y="15" width="3" height="10" rx="1.5" fill="#C8921E"/>
+              <circle cx="37.5" cy="26" r="2.5" fill="#C8921E"/>
+            </svg>
+          </span>
           <h3>Academic Excellence</h3>
           <p>We hold our students to a high standard, using the ABeka Books curriculum to ensure rigorous, structured learning from the earliest grades through graduation.</p>
         </div>
         <div class="value-card reveal reveal-d2">
-          <span class="value-icon">🤝</span>
+          <span class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="36" height="36" fill="none">
+              <path d="M4 22l7-7 5 2 4-4 5 1 7-7" stroke="#6B1A24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 22c1.5 1.5 3.5 3.5 6 4l4-4" stroke="#6B1A24" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M36 18c-1.5-1.5-3.5-3.5-6-4l-4 4" stroke="#8B2535" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M10 26l6-6m4 4l6-6" stroke="#C8921E" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="20" cy="20" r="3" fill="#8B2535"/>
+            </svg>
+          </span>
           <h3>Family Partnership</h3>
           <p>We see parents as partners. Education is most powerful when home and school share the same values and walk in the same direction together.</p>
         </div>
         <div class="value-card reveal reveal-d3">
-          <span class="value-icon">🌱</span>
+          <span class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="36" height="36" fill="none">
+              <path d="M20 34V18" stroke="#6B1A24" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M20 24 C20 24 10 22 8 12 C14 10 22 14 20 24Z" fill="#6B1A24"/>
+              <path d="M20 20 C20 20 28 16 34 20 C32 28 22 28 20 20Z" fill="#8B2535"/>
+              <path d="M14 34 Q20 30 26 34" stroke="#C8921E" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </span>
           <h3>Whole-Child Growth</h3>
           <p>Beyond academics, we invest in character, community, athletics, and spiritual development — nurturing students in every dimension of life.</p>
         </div>
