@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academics | Sinai Christian Academy | Linden, NJ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:       #6B1A24;
+      --navy-dark:  #3E0D14;
+      --gold:       #C8921E;
+      --gold-light: #E5A93A;
+      --cream:      #FAF8F3;
+      --sky:        #F7EDEF;
+      --text:       #1E1416;
+      --muted:      #7B5B60;
+      --white:      #FFFFFF;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(107,26,36,0.09);
+      --shadow-lg:  0 12px 40px rgba(107,26,36,0.16);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--cream); line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    .eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.6rem; }
+
+    /* Preview Bar */
+    .preview-bar { background: var(--gold); text-align: center; padding: 0.55rem 1rem; font-size: 0.78rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; position: relative; z-index: 1100; }
+    .preview-bar a { color: var(--navy); font-weight: 700; }
+
+    /* Navbar */
+    nav { position: sticky; top: 0; z-index: 1000; background: var(--navy); transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .nav-logo { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: var(--white); }
+    .nav-mark { width: 42px; height: 42px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1rem; color: var(--navy); flex-shrink: 0; transition: transform 0.3s; }
+    .nav-logo:hover .nav-mark { transform: rotate(8deg) scale(1.05); }
+    .nav-wordmark strong { display: block; font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; line-height: 1.2; color: var(--white); }
+    .nav-wordmark span { display: block; font-size: 0.68rem; color: rgba(255,255,255,0.5); }
+    .nav-links { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 0.45rem 0.8rem; border-radius: 6px; transition: all 0.2s; white-space: nowrap; }
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.09); }
+    .nav-links a.active { color: var(--gold) !important; }
+    .nav-cta { background: var(--gold) !important; color: var(--navy) !important; font-weight: 700 !important; padding: 0.5rem 1.1rem !important; }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* Page Hero */
+    .page-hero { background: linear-gradient(150deg, var(--navy-dark) 0%, var(--navy) 60%, #8B2535 100%); padding: 6rem 2rem 5rem; position: relative; overflow: hidden; }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(200,146,30,0.09) 1px, transparent 1px); background-size: 36px 36px; pointer-events: none; }
+    .page-hero-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--white); margin-bottom: 0.75rem; opacity: 0; animation: fadeUp 0.7s ease 0.2s forwards; }
+    .page-hero p { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 520px; opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards; }
+
+    /* Sections */
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); color: var(--navy); margin-bottom: 0.5rem; }
+    .section-header p { color: var(--muted); max-width: 540px; margin: 0.5rem auto 0; }
+    .bg-sky { background: var(--sky); }
+    .bg-cream { background: var(--cream); }
+    .bg-navy { background: var(--navy); }
+
+    /* ABeka Feature */
+    .abeka-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .abeka-text h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--navy); margin-bottom: 1rem; }
+    .abeka-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    .abeka-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+    .abeka-bullets li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.88rem; color: var(--text); line-height: 1.6;
+    }
+    .bullet-dot {
+      width: 20px; height: 20px; flex-shrink: 0;
+      border-radius: 50%; background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: var(--navy); font-weight: 700;
+      margin-top: 0.1rem;
+    }
+    .abeka-visual {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      border-radius: 16px; min-height: 360px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .abeka-visual-text {
+      text-align: center; position: relative; z-index: 1; padding: 2rem;
+    }
+    .abeka-visual-text .big { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--gold); font-weight: 900; line-height: 1; display: block; }
+    .abeka-visual-text .small { font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 0.5rem; display: block; }
+    .abeka-visual::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(200,146,30,0.1) 1px, transparent 1px); background-size: 28px 28px; }
+
+    /* Platform Cards */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .platform-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      box-shadow: var(--shadow);
+      border-bottom: 4px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .platform-card:hover { border-bottom-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .platform-badge {
+      display: inline-block;
+      background: var(--sky);
+      color: var(--navy);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    .platform-card h3 { font-size: 1.2rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .platform-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+    .platform-tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .ptag { background: var(--sky); color: var(--navy); font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.55rem; border-radius: 4px; }
+
+    /* Grade Bands */
+    .grades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .grade-card {
+      border-radius: var(--radius);
+      padding: 2rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .grade-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .grade-card-ec { background: linear-gradient(135deg, #3E0D14, #6B1A24); }
+    .grade-card-el { background: linear-gradient(135deg, #6B1A24, #8B2535); }
+    .grade-card-ms { background: linear-gradient(135deg, #5C1720, #8B2535); }
+    .grade-card-hs { background: linear-gradient(135deg, #3E0D14, #7A1E2C); }
+    .grade-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; display: block; }
+    .grade-card h3 { font-size: 1.15rem; color: var(--white); margin-bottom: 0.6rem; }
+    .grade-range { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); line-height: 1; display: block; margin-bottom: 0.75rem; }
+    .grade-card p { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+    /* Strip Quote */
+    .curriculum-strip { background: var(--navy); padding: 4.5rem 2rem; position: relative; overflow: hidden; }
+    .curriculum-strip::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(200,146,30,0.08) 1px, transparent 1px); background-size: 36px 36px; }
+    .curriculum-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+    .curriculum-inner h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--white); margin-bottom: 1rem; }
+    .curriculum-inner p { color: rgba(255,255,255,0.6); line-height: 1.85; max-width: 680px; margin: 0 auto 0.75rem; }
+
+    /* CTA */
+    .enroll-cta { background: var(--gold); padding: 4.5rem 2rem; text-align: center; }
+    .enroll-cta h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--navy); margin-bottom: 0.6rem; }
+    .enroll-cta p { color: rgba(107,26,36,0.65); margin-bottom: 2rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.85rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.25s; cursor: pointer; border: none; font-family: 'Inter', sans-serif; }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,146,30,0.4); }
+    .btn-navy { background: var(--navy); color: var(--white); }
+    .btn-navy:hover { background: var(--navy-dark); transform: translateY(-2px); }
+
+    /* Footer */
+    footer { background: var(--navy-dark); padding: 4rem 2rem 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2.2fr 1fr 1fr 1.2fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .footer-brand h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.15rem; margin-bottom: 0.8rem; }
+    .footer-brand p { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 260px; }
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 1.2rem; }
+    .soc-btn { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.8rem; font-weight: 700; transition: all 0.2s; }
+    .soc-btn:hover { background: var(--gold); color: var(--navy); }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-col ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { max-width: 1200px; margin: 1.5rem auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    .footer-bottom p { font-size: 0.76rem; color: rgba(255,255,255,0.3); }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .abeka-block { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preview Banner -->
+  <div class="preview-bar">
+    ✦ Website Design Sample — Prepared by <a href="https://tecwebstudio.com" target="_blank">TEC Web Studio</a> &nbsp;·&nbsp; Contact us to bring this to life ✦
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-mark">SCA</div>
+        <div class="nav-wordmark">
+          <strong>Sinai Christian Academy</strong>
+          <span>Linden, New Jersey · Est. 1973</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="academics.html" class="active">Academics</a></li>
+        <li><a href="#">Admissions</a></li>
+        <li><a href="#">Athletics</a></li>
+        <li><a href="#">News & Events</a></li>
+        <li><a href="https://form.jotform.com/261794652053057" target="_blank" class="nav-cta">Enroll Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="eyebrow">Learning at SCA</span>
+      <h1>Academics at Sinai Christian Academy</h1>
+      <p>A rigorous, faith-integrated curriculum powered by proven programs and modern technology — preparing every student from Pre-K through graduation.</p>
+    </div>
+  </section>
+
+  <!-- ABeka Curriculum -->
+  <section class="section bg-cream">
+    <div class="section-inner">
+      <div class="abeka-block">
+        <div class="abeka-text reveal">
+          <span class="eyebrow">Our Curriculum</span>
+          <h2>Built on the ABeka Books Foundation</h2>
+          <p>Sinai Christian Academy uses the ABeka Books curriculum — one of the nation's most respected Christian educational programs. ABeka provides a comprehensive, phonics-based, and biblically integrated approach to learning that has been trusted by Christian schools for over 60 years.</p>
+          <p>From the very first days of Pre-K through the rigors of 12th Grade, our students follow a structured academic path designed to challenge them, ground them in faith, and prepare them for every opportunity ahead.</p>
+          <ul class="abeka-bullets">
+            <li><span class="bullet-dot">✓</span> Phonics-first reading and language arts from the earliest grades</li>
+            <li><span class="bullet-dot">✓</span> Structured math sequences that build mastery year over year</li>
+            <li><span class="bullet-dot">✓</span> Biblically integrated history, science, and social studies</li>
+            <li><span class="bullet-dot">✓</span> College-preparatory rigor beginning in middle school</li>
+          </ul>
+        </div>
+        <div class="abeka-visual reveal reveal-d1">
+          <div class="abeka-visual-text">
+            <span class="big">ABeka</span>
+            <span class="small">Books Curriculum · Trusted Since 1954</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technology Platforms -->
+  <section class="section bg-sky">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">EdTech at SCA</span>
+        <h2>Learning Powered by Technology</h2>
+        <p>We invest in modern platforms that keep students engaged, give parents visibility, and help teachers personalize instruction across all grade levels.</p>
+      </div>
+      <div class="platforms-grid">
+        <div class="platform-card reveal">
+          <span class="platform-badge">Communication & School Management</span>
+          <h3>My School Worx</h3>
+          <p>Our school-wide communication and management platform. Parents receive real-time updates, announcements, grade information, and school events — all in one place. Your go-to hub for staying connected with SCA.</p>
+          <div class="platform-tag-row">
+            <span class="ptag">Grades K–12</span>
+            <span class="ptag">Parent Portal</span>
+            <span class="ptag">Announcements</span>
+          </div>
+        </div>
+        <div class="platform-card reveal reveal-d1">
+          <span class="platform-badge">Personalized Practice</span>
+          <h3>IXL Learning</h3>
+          <p>IXL provides personalized, adaptive practice in math, language arts, science, and social studies. Students work at their own pace while the platform identifies gaps and provides targeted exercises to build mastery.</p>
+          <div class="platform-tag-row">
+            <span class="ptag">Math</span>
+            <span class="ptag">Language Arts</span>
+            <span class="ptag">Adaptive Learning</span>
+          </div>
+        </div>
+        <div class="platform-card reveal reveal-d2">
+          <span class="platform-badge">Online Curriculum Platform</span>
+          <h3>Ignitia</h3>
+          <p>Ignitia is a faith-based online curriculum platform offering interactive, self-paced courses in core subjects. Aligned with ABeka's biblical worldview, it brings 21st-century digital learning to SCA's classrooms.</p>
+          <div class="platform-tag-row">
+            <span class="ptag">Grades 3–12</span>
+            <span class="ptag">Self-Paced</span>
+            <span class="ptag">Faith-Integrated</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grade Bands -->
+  <section class="section bg-cream">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="eyebrow">Every Stage of Learning</span>
+        <h2>From First Steps to Graduation</h2>
+        <p>Our Pre-K through 12th Grade program is carefully designed to meet students where they are and take them where they're going.</p>
+      </div>
+      <div class="grades-grid">
+        <div class="grade-card grade-card-ec reveal">
+          <span class="grade-label">Early Childhood</span>
+          <span class="grade-range">Pre-K – K</span>
+          <h3>Early Childhood Program</h3>
+          <p>Nurturing curiosity, building foundational literacy and numeracy, and instilling a love of learning from the very beginning — in a safe, faith-centered environment.</p>
+        </div>
+        <div class="grade-card grade-card-el reveal reveal-d1">
+          <span class="grade-label">Elementary</span>
+          <span class="grade-range">1st – 5th</span>
+          <h3>Elementary School</h3>
+          <p>Core academics deepen with structured ABeka instruction. Students build reading fluency, mathematical reasoning, and character through faith-integrated learning.</p>
+        </div>
+        <div class="grade-card grade-card-ms reveal reveal-d2">
+          <span class="grade-label">Middle School</span>
+          <span class="grade-range">6th – 8th</span>
+          <h3>Middle School</h3>
+          <p>A critical transition period. Students tackle increasingly complex coursework, explore electives, and begin developing the independence and leadership they'll carry into high school.</p>
+        </div>
+        <div class="grade-card grade-card-hs reveal reveal-d3">
+          <span class="grade-label">High School</span>
+          <span class="grade-range">9th – 12th</span>
+          <h3>High School</h3>
+          <p>College-preparatory rigor, expanded course catalog, athletics, and a senior experience that equips graduates for higher education and Kingdom-minded service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum Strip -->
+  <section class="curriculum-strip">
+    <div class="curriculum-inner reveal">
+      <span class="eyebrow" style="color:rgba(200,146,30,0.75)">Our Commitment</span>
+      <h2>Education That Shapes the Whole Person</h2>
+      <p>At Sinai Christian Academy, we believe academic excellence and spiritual formation are not in competition — they are partners. Our classrooms are places where students learn to think critically, grow in faith, and develop the character to serve their communities with integrity.</p>
+      <p>From ABeka's structured curriculum to our modern technology platforms, every resource we invest in exists to help each student reach their full God-given potential.</p>
+    </div>
+  </section>
+
+  <!-- Enroll CTA -->
+  <section class="enroll-cta">
+    <div class="section-inner">
+      <span class="eyebrow" style="color:rgba(107,26,36,0.55)">Take the Next Step</span>
+      <h2>Invest in Your Child's Future at SCA</h2>
+      <p>Enrollment for the 2026–2027 school year is open. Scholarship opportunities available — don't wait.</p>
+      <div class="cta-btns">
+        <a href="https://form.jotform.com/261794652053057" target="_blank" class="btn btn-navy">Begin Enrollment →</a>
+        <a href="#" class="btn" style="background:rgba(107,26,36,0.12);color:var(--navy);border:1.5px solid rgba(107,26,36,0.18);">Download Course Catalog</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>Sinai Christian Academy</h3>
+        <p>A Christ-centered private school serving Pre-K through 12th Grade in Linden, NJ. A proud member of ACSI.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/sinaichristianacademy/" target="_blank" class="soc-btn">f</a>
+          <a href="https://www.instagram.com/sinaichristianacademy/" target="_blank" class="soc-btn">ig</a>
+          <a href="https://maps.google.com/?cid=4333767049513679498" target="_blank" class="soc-btn">📍</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About SCA</a></li>
+          <li><a href="academics.html">Academics</a></li>
+          <li><a href="#">Admissions</a></li>
+          <li><a href="#">Athletics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Academics</h4>
+        <ul>
+          <li><a href="#">ABeka Curriculum</a></li>
+          <li><a href="#">Course Catalog</a></li>
+          <li><a href="#">Early Childhood</a></li>
+          <li><a href="#">Our Technology</a></li>
+          <li><a href="#">Academic Calendar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="tel:9084862006">(908) 486-2006</a></li>
+          <li><a href="mailto:mainoffice@sinaichristianacademy.org">mainoffice@sinaichristian.org</a></li>
+          <li><a href="#">2301 Grier Ave, Linden, NJ 07036</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Sinai Christian Academy · ACSI Member · All rights reserved</p>
+      <p>Design sample by <a href="https://tecwebstudio.com" target="_blank">TEC Web Studio</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
