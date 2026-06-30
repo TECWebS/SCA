@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Sinai Christian Academy | Linden, NJ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:       #6B1A24;
+      --navy-dark:  #3E0D14;
+      --gold:       #C8921E;
+      --gold-light: #E5A93A;
+      --cream:      #FAF8F3;
+      --sky:        #F7EDEF;
+      --text:       #1E1416;
+      --muted:      #7B5B60;
+      --white:      #FFFFFF;
+      --radius:     12px;
+      --shadow:     0 4px 24px rgba(107,26,36,0.10);
+      --shadow-lg:  0 12px 40px rgba(107,26,36,0.18);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--cream); line-height: 1.65; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.6rem;
+    }
+
+    /* Preview Bar */
+    .preview-bar {
+      background: var(--gold); text-align: center; padding: 0.55rem 1rem;
+      font-size: 0.78rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em;
+      position: relative; z-index: 1100;
+    }
+    .preview-bar a { color: var(--navy); font-weight: 700; }
+
+    /* Navbar */
+    nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--navy); transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between; height: 70px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.85rem; text-decoration: none; color: var(--white); }
+    .nav-mark {
+      width: 42px; height: 42px; border-radius: 50%; background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1rem;
+      color: var(--navy); flex-shrink: 0; transition: transform 0.3s;
+    }
+    .nav-logo:hover .nav-mark { transform: rotate(8deg) scale(1.05); }
+    .nav-wordmark strong { display: block; font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; line-height: 1.2; color: var(--white); }
+    .nav-wordmark span { display: block; font-size: 0.68rem; color: rgba(255,255,255,0.5); }
+    .nav-links { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.82rem;
+      font-weight: 500; padding: 0.45rem 0.8rem; border-radius: 6px; transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.09); }
+    .nav-links a.active { color: var(--gold) !important; }
+    .nav-cta { background: var(--gold) !important; color: var(--navy) !important; font-weight: 700 !important; padding: 0.5rem 1.1rem !important; }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* Page Hero */
+    .page-hero {
+      background: linear-gradient(150deg, var(--navy-dark) 0%, var(--navy) 60%, #8B2535 100%);
+      padding: 6rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(200,146,30,0.09) 1px, transparent 1px);
+      background-size: 36px 36px; pointer-events: none;
+    }
+    .page-hero-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+    .page-hero p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+
+    /* Shared */
+    .section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .bg-sky { background: var(--sky); }
+    .bg-cream { background: var(--cream); }
+    .bg-white { background: var(--white); }
+
+    /* Two-col layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+
+    .text-block h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--navy); margin-bottom: 1rem; }
+    .text-block p { color: var(--muted); margin-bottom: 1rem; line-height: 1.8; }
+    .text-block p:last-child { margin-bottom: 0; }
+
+    .visual-block {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      border-radius: 16px;
+      min-height: 340px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .visual-block-cross {
+      width: 160px; height: 220px; opacity: 0.15;
+      position: relative;
+    }
+    .visual-block-cross::before {
+      content: ''; position: absolute;
+      left: 50%; top: 0; transform: translateX(-50%);
+      width: 32px; height: 100%; background: var(--white); border-radius: 3px;
+    }
+    .visual-block-cross::after {
+      content: ''; position: absolute;
+      top: 26%; left: 0;
+      width: 100%; height: 32px;
+      background: var(--white); border-radius: 3px;
+    }
+    .visual-block .visual-label {
+      position: absolute;
+      bottom: 1.5rem; left: 1.5rem;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: rgba(255,255,255,0.4);
+    }
+
+    /* Value Cards */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 1.6rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--gold);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .value-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+    .value-card h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .value-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
+
+    /* Leadership */
+    .leader-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      transition: box-shadow 0.3s;
+    }
+    .leader-card:hover { box-shadow: var(--shadow-lg); }
+    .leader-avatar {
+      width: 80px; height: 80px; flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), #8B2535);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; color: var(--gold); font-weight: 700;
+    }
+    .leader-info h3 { font-size: 1.2rem; color: var(--navy); margin-bottom: 0.25rem; }
+    .leader-title {
+      font-size: 0.78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--gold); margin-bottom: 0.75rem; display: block;
+    }
+    .leader-info p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+    /* Mission Strip */
+    .mission-strip {
+      background: var(--navy);
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .mission-cross {
+      position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+      width: 400px; height: 540px; opacity: 0.04; pointer-events: none;
+    }
+    .mission-cross::before {
+      content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+      width: 70px; height: 100%; background: var(--white);
+    }
+    .mission-cross::after {
+      content: ''; position: absolute; top: 26%; left: 0;
+      width: 100%; height: 70px; background: var(--white);
+    }
+    .mission-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .mission-inner h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--white); margin-bottom: 1.25rem; }
+    .mission-inner p { color: rgba(255,255,255,0.6); line-height: 1.85; font-size: 1rem; margin-bottom: 1rem; }
+
+    /* Accreditation */
+    .accred-strip {
+      background: var(--navy-dark);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .accred-strip p { color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+    .accred-strip strong { color: var(--gold); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.85rem 1.8rem; border-radius: 8px; font-weight: 600;
+      font-size: 0.9rem; text-decoration: none; transition: all 0.25s;
+      cursor: pointer; border: none; font-family: 'Inter', sans-serif;
+    }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,146,30,0.4); }
+
+    /* Footer */
+    footer { background: var(--navy-dark); padding: 4rem 2rem 2rem; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2.2fr 1fr 1fr 1.2fr;
+      gap: 2.5rem; padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-brand h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.15rem; margin-bottom: 0.8rem; }
+    .footer-brand p { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 260px; }
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 1.2rem; }
+    .soc-btn {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      font-size: 0.8rem; font-weight: 700; transition: all 0.2s;
+    }
+    .soc-btn:hover { background: var(--gold); color: var(--navy); }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-col ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom {
+      max-width: 1200px; margin: 1.5rem auto 0;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .footer-bottom p { font-size: 0.76rem; color: rgba(255,255,255,0.3); }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+      .two-col.reverse { direction: ltr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .leader-card { flex-direction: column; gap: 1rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preview Banner -->
+  <div class="preview-bar">
+    ✦ Website Design Sample — Prepared by <a href="https://tecwebstudio.com" target="_blank">TEC Web Studio</a> &nbsp;·&nbsp; Contact us to bring this to life ✦
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-mark">SCA</div>
+        <div class="nav-wordmark">
+          <strong>Sinai Christian Academy</strong>
+          <span>Linden, New Jersey · Est. 1973</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="#">Admissions</a></li>
+        <li><a href="#">Athletics</a></li>
+        <li><a href="#">News & Events</a></li>
+        <li><a href="https://form.jotform.com/261794652053057" target="_blank" class="nav-cta">Enroll Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <span class="eyebrow">Who We Are</span>
+      <h1>About Sinai Christian Academy</h1>
+      <p>A Christ-centered community in Linden, NJ, committed to nurturing students academically, spiritually, and personally — from Pre-K all the way through graduation.</p>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="section bg-cream">
+    <div class="section-inner">
+      <div class="two-col">
+        <div class="text-block reveal">
+          <span class="eyebrow">Our History</span>
+          <h2>A Legacy of Faith &amp; Learning</h2>
+          <p>Sinai Christian Academy was founded with a singular conviction: that every child deserves an education rooted in faith, excellence, and community. For over 50 years, our school has stood in Linden, NJ as a beacon for families seeking a Christian alternative to public education.</p>
+          <p>From our early beginnings to our current campus on Grier Avenue, SCA has grown into a Pre-K through 12th Grade institution that graduates students who are prepared not only for college, but for life — anchored in their faith and ready to lead.</p>
+          <p>We are a proud member of the Association of Christian Schools International (ACSI) and hold accreditation that reflects our commitment to academic rigor and institutional excellence.</p>
+        </div>
+        <div class="visual-block reveal reveal-d1">
+          <div class="visual-block-cross"></div>
+          <span class="visual-label">Sinai Christian Academy · Linden, NJ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mission-strip">
+    <div class="mission-cross"></div>
+    <div class="mission-inner reveal">
+      <span class="eyebrow" style="color:rgba(200,146,30,0.75)">Mission & Vision</span>
+      <h2>Who We're Called to Be</h2>
+      <p>Our mission is to provide a quality Christian education that develops the whole child — mind, body, and spirit — in a safe, nurturing environment that honors God and equips students for a purpose-driven life.</p>
+      <p>We believe that when faith and learning walk together, students don't just earn a diploma — they discover their calling.</p>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="section bg-sky">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <span class="eyebrow">What Drives Us</span>
+        <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:var(--navy)">Our Core Values</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <span class="value-icon">✝️</span>
+          <h3>Christ-Centered</h3>
+          <p>Faith is not an add-on — it is the foundation. Every classroom, every lesson, and every relationship at SCA is grounded in biblical truth.</p>
+        </div>
+        <div class="value-card reveal reveal-d1">
+          <span class="value-icon">🎓</span>
+          <h3>Academic Excellence</h3>
+          <p>We hold our students to a high standard, using the ABeka Books curriculum to ensure rigorous, structured learning from the earliest grades through graduation.</p>
+        </div>
+        <div class="value-card reveal reveal-d2">
+          <span class="value-icon">🤝</span>
+          <h3>Family Partnership</h3>
+          <p>We see parents as partners. Education is most powerful when home and school share the same values and walk in the same direction together.</p>
+        </div>
+        <div class="value-card reveal reveal-d3">
+          <span class="value-icon">🌱</span>
+          <h3>Whole-Child Growth</h3>
+          <p>Beyond academics, we invest in character, community, athletics, and spiritual development — nurturing students in every dimension of life.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership -->
+  <section class="section bg-cream">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+        <span class="eyebrow">Our People</span>
+        <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);color:var(--navy)">Meet Our Leadership</h2>
+        <p style="color:var(--muted);max-width:480px;margin:0.5rem auto 0;">Our administration and board are committed to the mission, the families, and the future of Sinai Christian Academy.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.25rem; max-width:780px; margin:0 auto;">
+        <div class="leader-card reveal">
+          <div class="leader-avatar">P</div>
+          <div class="leader-info">
+            <h3>Our Principal</h3>
+            <span class="leader-title">Head of School &amp; Academic Leadership</span>
+            <p>SCA's principal brings decades of Christian education experience to our community. With a deep commitment to both faith and academic rigor, our leadership sets the tone for a culture of excellence and belonging throughout the entire school.</p>
+          </div>
+        </div>
+        <div class="leader-card reveal reveal-d1">
+          <div class="leader-avatar">B</div>
+          <div class="leader-info">
+            <h3>Board of Directors</h3>
+            <span class="leader-title">Governance &amp; Institutional Oversight</span>
+            <p>Our board is made up of dedicated community members, alumni, and faith leaders who provide strategic direction and ensure SCA remains true to its founding mission. They serve as stewards of the school's legacy and future.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Accreditation -->
+  <div class="accred-strip">
+    <p>Sinai Christian Academy is a proud member of the <strong>Association of Christian Schools International (ACSI)</strong> · Linden, NJ 07036</p>
+  </div>
+
+  <!-- CTA -->
+  <section class="section bg-sky" style="padding: 4rem 2rem; text-align:center;">
+    <div class="section-inner reveal">
+      <span class="eyebrow">Take the Next Step</span>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.5rem);color:var(--navy);margin-bottom:0.6rem;">Come See SCA for Yourself</h2>
+      <p style="color:var(--muted);max-width:460px;margin:0 auto 2rem;">We'd love to welcome your family. Schedule a campus tour or begin your enrollment application today.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="https://form.jotform.com/261794652053057" target="_blank" class="btn btn-gold">Start Enrollment</a>
+        <a href="#" class="btn" style="background:var(--navy);color:var(--white);">Book a Tour</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>Sinai Christian Academy</h3>
+        <p>A Christ-centered private school serving Pre-K through 12th Grade in Linden, NJ. A proud member of ACSI.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/sinaichristianacademy/" target="_blank" class="soc-btn">f</a>
+          <a href="https://www.instagram.com/sinaichristianacademy/" target="_blank" class="soc-btn">ig</a>
+          <a href="https://maps.google.com/?cid=4333767049513679498" target="_blank" class="soc-btn">📍</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About SCA</a></li>
+          <li><a href="academics.html">Academics</a></li>
+          <li><a href="#">Admissions</a></li>
+          <li><a href="#">Athletics</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Academic Calendar</a></li>
+          <li><a href="#">Course Catalog</a></li>
+          <li><a href="#">Uniform Policy</a></li>
+          <li><a href="#">Graduating Classes</a></li>
+          <li><a href="#">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="tel:9084862006">(908) 486-2006</a></li>
+          <li><a href="mailto:mainoffice@sinaichristianacademy.org">mainoffice@sinaichristian.org</a></li>
+          <li><a href="#">2301 Grier Ave, Linden, NJ 07036</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Sinai Christian Academy · ACSI Member · All rights reserved</p>
+      <p>Design sample by <a href="https://tecwebstudio.com" target="_blank">TEC Web Studio</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
